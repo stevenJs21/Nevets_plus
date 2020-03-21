@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700|Work+Sans:300,400,500,600,700");
+*{
+  margin: 0px;
+  border: 0px ;
+  padding: 0px;
+   font-family: "Work Sans", sans-serif;
+}
+body{
+  background: #16011A;
+  color: white;
+}
+nav.navbar{
+	  background: linear-gradient(to bottom, #730183, #2B022F);
+	  width: 100%;
+}
