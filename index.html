@@ -1,109 +1,201 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/css/bootstrap4-toggle.min.css"
-    rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-  <title>Nevets Plus</title>
-</head>
-
-<body onload="verestado()">
-  <div class="container">
-    <nav class="navbar navbar-light bg-light justify-content-between">
-      <a class="navbar-brand">Nevets Plus</a>
-      <div class="form-inline">
-        <div class="custom-control custom-checkbox my-1 mr-sm-2" id="checkLogin">
-          <input type="checkbox" checked data-toggle="toggle" data-on="Registrar" data-off="Loguearse" id="loginRestro" >
-        </div>
-        <div id="areaRegistro" style="display: none;">
-          <input type="email" id="email" placeholder="Coloca aqui tu email" class="form-control mr-sm-2" />
-          <input type="password" id="pass" placeholder="Coloca aqui tu password" class="form-control mr-sm-2" />
-          <button onclick="enviar()" class="btn btn-outline-success my-2 my-sm-0">Registro</button>
-        </div>
-        <div id="areaLogin" style="display: none;">
-          <input type="email" id="emailA" placeholder="Coloca aqui tu email" class="form-control mr-sm-2" value="@gmail.com" />
-          <input type="password" id="passA" placeholder="Coloca aqui tu password" class="form-control mr-sm-2" />
-          <button onclick="acceso()" id="btnAcceso" class="btn btn-outline-success my-2 my-sm-0">Acceso</button>
-          <button id="btnCerrar" type="button" class="btn btn-danger" onclick="cerrar()"  style="display: none;">Cerra sesion</button>
-        </div>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/css/bootstrap4-toggle.min.css"
+      rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="css/styles.css">
+      <title>Nevets Plus</title>
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet"> 
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+      <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+      <link rel="shortcut icon" href="assest/img/ico.ico">     
+    </head>
+    <body onload="verestado()">
+      <div class="barnav barvavA">
+        <nav class="navbar barvavA navbar-light bg-light ">
+          <a href="" class="this navbar-brand">Nevets Plus</a>
+          <div class="form-inline">
+            <div class="custom-control custom-checkbox my-1 mr-sm-2" id="checkLogin">
+              <input type="checkbox" checked data-toggle="toggle" data-on="Registrar" data-off="Loguearse" id="loginRestro" >
+            </div>
+            <div id="areaRegistro" style="display: none;">
+              <input type="email" id="email" placeholder="Coloca aqui tu email" class="form-control mr-sm-2" />
+              <input type="password" id="pass" placeholder="Coloca aqui tu password" class="form-control mr-sm-2" />
+              <button onclick="enviar()" class="btn btn-outline-success my-2 my-sm-0">Registro</button>
+            </div>
+            <div id="areaLogin" style="display: none;">
+              <input type="email" id="emailA" placeholder="Coloca aqui tu email" class="form-control mr-sm-2" value="" />
+              <input type="password" id="passA" placeholder="Coloca aqui tu password" class="form-control mr-sm-2" />
+              <button onclick="acceso()" id="btnAcceso" class="btn btn-outline-success my-2 my-sm-0">Acceso</button>
+              <button id="mi_cuenta" id="btn-abrir-popup" type="button" class="btn btn-outline-success my-2 my-sm-0"   style="display: none;">Mi cuenta</button>
+              <button id="btnCerrar" type="button" class="btn btn-danger" onclick="cerrar()"  style="display: none;">Cerra sesion</button>
+            </div>
+          </div>
+        </nav>      
       </div>
-    </nav>
-    
-  </div>
+      <br>
+      <section onLoad="carga()" id="userout" class="" style="display: none;">
+        <div class="newC">
+          <div class="new">
+            <div class="newA">
+              <div class="newB">
+                <h1>Quienes Somos</h1>
 
-<br>
-<section onLoad="carga()" id="userout" class="container" style="display: none;">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</section>
-<section  id="userin" class="container bar" style="display: none;">
-  <h1>Bienvenido Sr. usuario</h1>
-  <br>
-  <hr>
-  <div class="all">
-    <ul>
-      <li class="li liA"><h2>Estados</h2></li>
-       <li class="li liB"><div class="custom-control custom-checkbox my-1 mr-sm-2" id="checkLogin">
-          <input type="checkbox" checked data-toggle="toggle" title="Ve o crea un estado" data-on="Ver" data-off="Crear" id="statusA">
-        </div></li>
-         <li class="li liC"><h2>Chat</h2></li>
-    </ul>
-    <ul ><div class="status" id="list" style="display: none;">
-          <h3><b>Lista de estados</b></h3>
-          <div id="list1">
-            <table id="list2">
-              <tr>
-                <td>Nombre</td>
-                <td>Descripcion</td>
-                <td>Archivo</td>
-              </tr>
-            </table>
+            </div>
+            <p class="p">Esta paginá tiene contenido para aprendizaje, además, es parte de una prueba tecnica para una oferta laboral. Consiste en una paginá de desarrollo web en la cual se pueden inscribir personas que quieran aprender del tema de la programación y que necesiten adjuntar archivos, recordatorios, etc.</p>
+            <span>Nota: Las imagenes mostradas son usadas de internet y no son de mi autoria</span>
+            <hr class="hr">
+            <img class="img" src="https://images8.alphacoders.com/540/thumb-1920-540082.jpg">
           </div>
         </div>
-        <div class="status" id="create" style="display: none;">
-          <h3><b>Crear un estado</b></h3>
-          <div>
-            <input type="name" class="form-control mr-sm-2" placeholder="Nombre" id="name"  name=""><br>
-            <textarea class="form-control mr-sm-2" placeholder="Descripcion" class="textarea" id="desc"></textarea><br>
-            <input type="file" value="Adjunta un archivo" id="file" class="btn-outline-success" name="">
+         <div class="newD">
+            <div class="newE">
+              <div class="newF">
+                <h1>Contacto</h1>
+
+            </div>
             <br>
-            <br>
-             <button onclick="inserstatus()" id="btnAcceso" class="btn btn-outline-success my-2 my-sm-0">Enviar</button>
-          </div> 
+              <ul>
+                <li></li>
+              </ul>
+            <hr class="hr">
+          </div>
         </div>
-    </ul>
-    
-  </div>
-</section>
+       </div> 
+      </section>
+      <section  id="userin" class="bar" style="display: none;">
+        <div class="inicio">
+        <h1 >Bienvenido Sr. usuario </h1><h1 id="emailJ"></h1>
+        </div>
+        <br>
+        <hr class="hr">
+        <div class="overlay" id="overlay">
+          <div class="popup" id="popup">
+            <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+            <h3>Mi Galeria</h3>
+            <h4>Almacena imagenes de tus proyectos</h4>
+            <form action="">
+              <div class="contenedor-inputs">
+                <input type="text" placeholder="Nombre">
+                <input type="email" placeholder="Correo">
+              </div>
+              <input type="submit" class="btn-submit" value="Suscribirse">
+            </form>
+          </div>
+        </div>
+        <div class="navbar1">
+          <div class="title">
+            <li class="li liB">
+              <div class="liBA custom-control custom-checkbox my-1 mr-sm-2" id="checkLogin">
+                <input type="checkbox" checked data-toggle="toggle" title="Ve o crea un estado" data-on="Chat" data-off="Tareas" id="statusA">
+              </div></li>
+              <li class="liA">| Chat | Crear Tarea | Lista de tareas  </li>    
+            </div>
+            <div class="allA">
+              <div class="cabA">
+                <h2>Lista de tareas</h2>
+              </div>
+              <div id="list1">
+                <table id="list2" class="ttable table">
+                  <thead class="thead-dark">
+                    <td>Correo desarrollador</td>
+                    <td>Tarea</td>
+                    <td>Descripcion</td>
+                    <td>Fecha de inicio</td>
+                    <td>Fecha Final</td>
+                    <td colspan="3">Acciones</td>
+                  </thead>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                </table>
+              </div>
 
+            </div>
+            <div id="allB" class="allB" style="">
+              <div class="cabB">
+                <span class="glyphicon glyphicon-comment"></span><h2>Chat online</h2>
+              </div>
+              <div class="row1">
+                <div class="col-md-6 col-md-offset-3">
+                  <div class="panel panel-primary">
+
+                    <div class="panel-body">
+                      <ul class="chat"> </ul>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="panel-footer">
+                <div class="input-group">
+                  <input id="nombre" type="text" minlength="2" class="form-control input-sm" placeholder="Escribe tu nombre"/>
+                  <input id="Mensaje" type="text" minlength="2" class="form-control input-sm" placeholder="Escribe un mensaje..." />
+                  <span class="input-group-btn">
+                    <button class="btn btn-warning btn-sm" id="btnEnviar" >
+                    Enviar</button>
+                  </span>
+                </div>
+              </div>
+              <li style="display:none" id="plantilla" class="left clearfix">
+               <span class="chat-img pull-left">
+                 <img src="http://placehold.it/50/55C1E7/fff&text=U"class="img-circle" />
+               </span>
+               <div class="chat-body clearfix">
+                <div class="header">
+                  <strong class="primary-font Nombre" >Nevets</strong> 
+                  <small class="pull-right text-muted">
+                    <span class="glyphicon glyphicon-asterisk Tiempo">
+                    </span> </small>
+                  </div>
+                  <p class="Mensaje">
+                   Mensaje
+                 </p>
+               </div>
+             </li>
+
+           </div>
+           <div id="allC" class="allB" style="display: none;">
+            <div class="cabB">
+              <span class="glyphicon glyphicon-comment"></span><h2>Crear tarea</h2>
+            </div>
+            <div class="create">
+             <input type="email" id="emailC" placeholder="Correo del encargado" class="form-control" value=""  disabled="" />
+             <br>
+             <input type="name" class="form-control mr-sm-2" placeholder="Tarea a realizar" id="tareaA"  name=""><br>
+             <textarea class="form-control mr-sm-2" placeholder="Descripcion" class="textarea" id="descA"></textarea><br>
+             <span class="label label-default">Fecha de Inicio</span><br>
+             <input type="date" class="form-control mr-sm-2" id="inicioA"  name=""><br>
+             <span class="label label-default">Fecha a terminar</span><br>
+             <input type="date" class="form-control mr-sm-2" id="finA"  name="">
+             <br>
+             <center><button onclick="udpt()" id="btnAcceso" class="btn btn-outline-success my-2 my-sm-0">Enviar</button></center>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+  </section><br>
   <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+  crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-  <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#config-web-app -->
-  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>
-  <script src="js/app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
-  </body>
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+  crossorigin="anonymous"></script>
+       <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>
 
-</html>
+       <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+       <script src="js/app.js"></script>
+       <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+     </body>
+
+     </html>
