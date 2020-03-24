@@ -3,27 +3,23 @@ function iniciarMap(){
     var map = new google.maps.Map(document.getElementById('map'),{
       zoom: 15,
       center: coord
-    });88
+  });88
     var marker = new google.maps.Marker({
       position: coord,
       map: map
-    });
+  });
 }
 var firebaseConfig = {
-   apiKey: "AIzaSyABm7Ebrm1QyiR5-NXNUF6u0Yz_Ln1kvrQ",
-    authDomain: "nevets-plus.firebaseapp.com",
-    databaseURL: "https://nevets-plus.firebaseio.com",
-    projectId: "nevets-plus",
-    storageBucket: "nevets-plus.appspot.com",
-    messagingSenderId: "691155546336",
-    appId: "1:691155546336:web:3e1dba87576245bcb42085",
-    measurementId: "G-Q8YFCEK5DY"
+ apiKey: "AIzaSyABm7Ebrm1QyiR5-NXNUF6u0Yz_Ln1kvrQ",
+ authDomain: "nevets-plus.firebaseapp.com",
+ databaseURL: "https://nevets-plus.firebaseio.com",
+ projectId: "nevets-plus",
+ storageBucket: "nevets-plus.appspot.com",
+ messagingSenderId: "691155546336",
+ appId: "1:691155546336:web:3e1dba87576245bcb42085",
+ measurementId: "G-Q8YFCEK5DY"
 };
 firebase.initializeApp(firebaseConfig);
-
-
-
-
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         var displayName = user.displayName;
@@ -50,14 +46,9 @@ firebase.auth().onAuthStateChanged(function (user) {
         document.getElementById("responsiveopt").style.display = "";
         document.getElementById("userout").style.display = "none";
         document.getElementById("userin").style.display = "";
-
-
-         document.getElementById("emailC").value = email;
-        
-        
+        document.getElementById("emailC").value = email;       
         document.getElementById('emailA').style.display = "none";
-        document.getElementById('passA').style.display = "none";
-        
+        document.getElementById('passA').style.display = "none"; 
         document.getElementById("emailJ").innerHTML= email;
     } else {
         document.getElementById("btnAcceso").style.display = "";
@@ -67,22 +58,17 @@ firebase.auth().onAuthStateChanged(function (user) {
         document.getElementById("btnmenu").style.display = "";
         document.getElementById("userout").style.display = "";
         document.getElementById("userin").style.display = "none";
-
         document.getElementById("areaLogin").style.display = "none";
         document.getElementById('passA').style.display = "";
         document.getElementById("btnCerrar").style.display = "none";
         document.getElementById("mi_cuenta").style.display = "none";
     }
 });
-
 $(document).ready(main);
-
 var contador = 1;
-
 function main(){
     $('.menu_bar').click(function(){
         // $('nav').toggle();
-
         if(contador == 1){
             $('#nav').animate({
                 left: '0'
@@ -94,11 +80,8 @@ function main(){
                 left: '-100%'
             });
         }
-
     });
-
 };
-
 function status(id){
     return document.getElementById(id).value;
 }
@@ -125,7 +108,6 @@ function inserstatus(){
     var desc = status("desc");
     var inicio = status("inicio");
     var fin = status("fin");
-
     if (emailC.length==0 || tarea.length==0 || desc.length==0 ||inicio.length==0 || fin.length==0) {
         alert("Algunos campos estan vacios");
     }else{
@@ -137,36 +119,30 @@ function inserstatus(){
         vaciarcampos("tarea","");
         vaciarcampos("desc","");
         vaciarcampos("inicio","");
-        vaciarcampos("fin","");
-        
-        }
+        vaciarcampos("fin","");       
     }
-        
-
+}
 function table(emailC,tarea,desc,inicio,fin){
     return '<tr>'+'<td>'+emailC+'</td>'
     +'<td>'+tarea+'</td>'+'<td>'+
     desc+'</td>'+'<td>'+inicio+
-    '</td>'+'<td>'+fin+'</td>'+
-    
+    '</td>'+'<td>'+fin+'</td>'+    
     '<td><i class="fas fa-edit"'+
     'onclick="edit(\''+emailC+'\',\''+tarea+'\',\''+desc+'\',\''+inicio+'\',\''+fin+'\')" ></i></td>'+'<td>|</td>'+
     '<td><i class="far fa-trash-alt"'+ 
     'onclick="deleting(\''+tarea+'\')" ></i></td>'+
     '</tr>'+'<br>';
 }
-     
+
 (adsbygoogle = window.adsbygoogle || []).push({});
-
-
 function edit(emailC,tarea,desc,inicio,fin){ 
-             $('#allC').show();
-            $('#allB').hide(); 
-            vaciarcampos("emailC",emailC);
-            vaciarcampos("tareaA",tarea);
-            vaciarcampos("descA",desc);
-            vaciarcampos("inicioA",inicio);
-            vaciarcampos("finA",fin);
+   $('#allC').show();
+   $('#allB').hide(); 
+   vaciarcampos("emailC",emailC);
+   vaciarcampos("tareaA",tarea);
+   vaciarcampos("descA",desc);
+   vaciarcampos("inicioA",inicio);
+   vaciarcampos("finA",fin);
 }    
 function array(emailC,tareaA,descA,inicioA,finA){
     var dataA= {
@@ -185,36 +161,36 @@ function udpt() {
     var descA = status("descA");
     var inicioA = status("inicioA");
     var finA = status("finA");
-        if (emailCA.length==0 || 
-            tareaA.length==0 || 
-            descA.length==0 ||
-            inicioA.length==0 || 
-            finA.length==0) {
+    if (emailCA.length==0 || 
+        tareaA.length==0 || 
+        descA.length==0 ||
+        inicioA.length==0 || 
+        finA.length==0) {
         alert("Algunos campos estan vacios");
-    }else{
-        
-        firebase.database().ref("tarea/"+tareaA).update({
-            emailC:emailCA,
-            tarea:tareaA,
-            desc:descA,
-            inicio:inicioA,
-            fin:finA
-        });
-        
-        alert("Datos ingresados / actualizados correctamente");
-        vaciarcampos("emailC","");
-        vaciarcampos("tarea","");
-        vaciarcampos("desc","");
-        vaciarcampos("inicio","");
-        vaciarcampos("fin","");
-    }   
+}else{
+    
+    firebase.database().ref("tarea/"+tareaA).update({
+        emailC:emailCA,
+        tarea:tareaA,
+        desc:descA,
+        inicio:inicioA,
+        fin:finA
+    });
+    
+    alert("Datos ingresados / actualizados correctamente");
+    vaciarcampos("emailC","");
+    vaciarcampos("tarea","");
+    vaciarcampos("desc","");
+    vaciarcampos("inicio","");
+    vaciarcampos("fin","");
+}   
 }
 function deleting(tarea){
     if (confirm("¿Vas a eliminar este registro?")) {
         firebase.database().ref("tarea/"+tarea).remove();
     }
-        
-    }
+    
+}
 function verestado(){
     var task = firebase.database().ref("tarea/");
     task.on("child_added",function(data){
@@ -223,19 +199,19 @@ function verestado(){
         mostrarestado("list2",other);
     });
 }    
-   
+
 function enviar() {
     var email = document.getElementById('email').value;
     var pass = document.getElementById('pass').value;
     firebase.auth().createUserWithEmailAndPassword(email, pass)
-        .catch(function (error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            alert("Algo anda mal, Verifica que los datos esten correctamente ingresados o prueba tu conexion");
-        })
-        .then(function () {
-            verificar();
-        });
+    .catch(function (error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert("Algo anda mal, Verifica que los datos esten correctamente ingresados o prueba tu conexion");
+    })
+    .then(function () {
+        verificar();
+    });
 }
 function enviar1() {
     var email = document.getElementById('email1').value;
@@ -243,14 +219,14 @@ function enviar1() {
     overlayB.classList.remove('active');
     popupB.classList.remove('active');
     firebase.auth().createUserWithEmailAndPassword(email, pass)
-        .catch(function (error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            alert("Algo anda mal, Verifica que los datos esten correctamente ingresados o prueba tu conexion");
-        })
-        .then(function () {
-            verificar();
-        });
+    .catch(function (error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert("Algo anda mal, Verifica que los datos esten correctamente ingresados o prueba tu conexion");
+    })
+    .then(function () {
+        verificar();
+    });
 }
 function verificar() {
     var user = firebase.auth().currentUser;
@@ -264,11 +240,11 @@ function acceso() {
     var emailA = document.getElementById('emailA').value;
     var passA = document.getElementById('passA').value;
     firebase.auth().signInWithEmailAndPassword(emailA, passA)
-        .catch(function (error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            alert("No se pudo Iniciar sesión, Intenta de nuevo o mas tarde");
-        });
+    .catch(function (error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert("No se pudo Iniciar sesión, Intenta de nuevo o mas tarde");
+    });
 }
 function acceso1() {
     var emailA = document.getElementById('emailA1').value;
@@ -277,20 +253,20 @@ function acceso1() {
     popupB.classList.remove('active');
     firebase.auth().signInWithEmailAndPassword(emailA, passA)
     .catch(function (error) {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    alert("No se pudo Iniciar sesión, Intenta de nuevo o mas tarde");
-        });
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert("No se pudo Iniciar sesión, Intenta de nuevo o mas tarde");
+    });
 }
 
 function cerrar() {
     firebase.auth().signOut()
-        .then(function () {
-            console.log('Salir');
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+    .then(function () {
+        console.log('Salir');
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
 }
 
 $(document).ready(function () {
@@ -318,18 +294,18 @@ $(document).ready(function () {
     });
 });
 
-        var TablaDeBaseDatos= firebase.database().ref('chat');
-        TablaDeBaseDatos.limitToLast(20).on('value',function(snapshot){
-        
+var TablaDeBaseDatos= firebase.database().ref('chat');
+TablaDeBaseDatos.limitToLast(20).on('value',function(snapshot){
+    
          $(".chat").html(""); // Limpiamos todo el contenido del chat
-        
+         
         // Leer todos los mensajes en firebase
         snapshot.forEach(function(e){
             var objeto=e.val(); // Asignar todos los valores a un objeto
             
             // Validar datos nulos y agregar contenido en forma de lista etiqueta <li>
-             if((objeto.Mensaje!=null)&&(objeto.Nombre!=null)){
-                 
+            if((objeto.Mensaje!=null)&&(objeto.Nombre!=null)){
+               
                  // Copia el contenido al template y luego lo inserta en el chat
                  $( "#plantilla" ).clone().prependTo( ".chat" );
                  $('.chat #plantilla').show(100);
@@ -338,42 +314,42 @@ $(document).ready(function () {
                  $('.chat #plantilla .Tiempo').html(objeto.Fecha);
                  $('.chat #plantilla').attr("id","");
              }
-            
-        });
+             
+         });
     });
-    
-    
-          
-       $('#btnEnviar').click(function(){
-           var formatofecha= new Date(); 
-           var d= formatofecha.getUTCDate();
-           var m= formatofecha.getMonth()+1;
-           var y= formatofecha.getFullYear();
-           var h=formatofecha.getHours();
-           var min= formatofecha.getMinutes();
-           
-           Fecha= d+"/"+m+"/"+y+" "+h+":"+min;
-           
-           TablaDeBaseDatos.push({
-               Nombre:$("#nombre").val(),
-               Mensaje:$("#Mensaje").val(),
-               Fecha:Fecha
-            });
-           
-           
-       });
 
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+
+$('#btnEnviar').click(function(){
+ var formatofecha= new Date(); 
+ var d= formatofecha.getUTCDate();
+ var m= formatofecha.getMonth()+1;
+ var y= formatofecha.getFullYear();
+ var h=formatofecha.getHours();
+ var min= formatofecha.getMinutes();
+ 
+ Fecha= d+"/"+m+"/"+y+" "+h+":"+min;
+ 
+ TablaDeBaseDatos.push({
+     Nombre:$("#nombre").val(),
+     Mensaje:$("#Mensaje").val(),
+     Fecha:Fecha
+ });
+ 
+ 
+});
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-74824848-1', 'auto');
-  ga('send', 'pageview');
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-74824848-1', 'auto');
+ga('send', 'pageview');
 // galeria
 var btnAbrirPopup = document.getElementById('mi_cuenta'),
-    overlay = document.getElementById('overlay'),
-    popup = document.getElementById('popup'),
-    btnCerrarPopup = document.getElementById('btn-cerrar-popup');
+overlay = document.getElementById('overlay'),
+popup = document.getElementById('popup'),
+btnCerrarPopup = document.getElementById('btn-cerrar-popup');
 
 btnAbrirPopup.addEventListener('click', function(){
     overlay.classList.add('active');
@@ -386,9 +362,9 @@ btnCerrarPopup.addEventListener('click', function(e){
     popup.classList.remove('active');
 });
 var btnAbrirPopup = document.getElementById('mi_cuentaB'),
-    overlay = document.getElementById('overlay'),
-    popup = document.getElementById('popup'),
-    btnCerrarPopup = document.getElementById('btn-cerrar-popup');
+overlay = document.getElementById('overlay'),
+popup = document.getElementById('popup'),
+btnCerrarPopup = document.getElementById('btn-cerrar-popup');
 
 btnAbrirPopup.addEventListener('click', function(){
     overlay.classList.add('active');
@@ -402,9 +378,9 @@ btnCerrarPopup.addEventListener('click', function(e){
 });
 // iniciar session responsive
 var btnAbrirPopupB = document.getElementById('btnmenu'),
-    overlayB = document.getElementById('overlayB'),
-    popupB = document.getElementById('popupB'),
-    btnCerrarPopupB = document.getElementById('btn-cerrar-popupB');
+overlayB = document.getElementById('overlayB'),
+popupB = document.getElementById('popupB'),
+btnCerrarPopupB = document.getElementById('btn-cerrar-popupB');
 
 btnAbrirPopupB.addEventListener('click', function(){
     overlayB.classList.add('active');
@@ -426,21 +402,21 @@ function formul() {
     var phone = statusA("phone");
     var inq = statusA("inq");
     var descZ = statusA("descZ");
-        if (namesA.length==0 || 
-            emailZ.length==0 || 
-            phone.length==0 ||
-            inq.length==0 || 
-            descZ.length==0) {
+    if (namesA.length==0 || 
+        emailZ.length==0 || 
+        phone.length==0 ||
+        inq.length==0 || 
+        descZ.length==0) {
         alert("Algunos campos estan vacios");
-    }else{
-        var arrayDataA = array(namesA,emailZ,phone,inq,descZ);
-        var form = firebase.database().ref("formulario/"+key);
-        form.set(arrayDataA);
-        alert("Guardado correctamente");
-        vaciarcampos("namesA","");
-        vaciarcampos("emailZ","");
-        vaciarcampos("phone","");
-        vaciarcampos("inq","");
-        vaciarcampos("descZ","");
-    }   
+}else{
+    var arrayDataA = array(namesA,emailZ,phone,inq,descZ);
+    var form = firebase.database().ref("formulario/"+key);
+    form.set(arrayDataA);
+    alert("Guardado correctamente");
+    vaciarcampos("namesA","");
+    vaciarcampos("emailZ","");
+    vaciarcampos("phone","");
+    vaciarcampos("inq","");
+    vaciarcampos("descZ","");
+}   
 }
