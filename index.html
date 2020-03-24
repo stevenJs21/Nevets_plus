@@ -13,13 +13,15 @@
       <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet"> 
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
       <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
-      <link rel="shortcut icon" href="assest/img/ico.ico">     
+      <script type="text/javascript" src="js/jquery.js"></script>
+      <link class="icon" rel="shortcut icon" href="assest/img/ico.ico">     
     </head>
     <body onload="verestado()">
       <div class="barnav barvavA">
         <nav class="navbar barvavA navbar-light bg-light ">
           <a href="" class="this navbar-brand">Nevets Plus</a>
-          <div class="form-inline">
+          <button id="btnmenu" onclick="" class="btnX btn btn-outline-success my-2 my-sm-0"><i class="fas fa-stream"></i></button>
+          <div class="ocult form-inline">
             <div class="custom-control custom-checkbox my-1 mr-sm-2" id="checkLogin">
               <input type="checkbox" checked data-toggle="toggle" data-on="Registrar" data-off="Loguearse" id="loginRestro" >
             </div>
@@ -32,11 +34,43 @@
               <input type="email" id="emailA" placeholder="Coloca aqui tu email" class="form-control mr-sm-2" value="" />
               <input type="password" id="passA" placeholder="Coloca aqui tu password" class="form-control mr-sm-2" />
               <button onclick="acceso()" id="btnAcceso" class="btn btn-outline-success my-2 my-sm-0">Acceso</button>
-              <button id="mi_cuenta" id="btn-abrir-popup" type="button" class="btn btn-outline-success my-2 my-sm-0"   style="display: none;">Mi cuenta</button>
-              <button id="btnCerrar" type="button" class="btn btn-danger" onclick="cerrar()"  style="display: none;">Cerra sesion</button>
+             
+              <button id="mi_cuenta" id="btn-abrir-popup" type="button" class="btn btn-outline-success my-2 my-sm-0 respA"   style="display: none;">Galeria</button>
+              <button id="btnCerrar" type="button" class="btn btn-danger respA" onclick="cerrar()"  style="display: none;">Cerra sesion</button>
             </div>
           </div>
         </nav>      
+      </div>
+      <div  id="responsiveopt" class="responsiveopt">
+        <center>
+        <button id="mi_cuentaB" id="btn-abrir-popup" type="button" class="btn btn-outline-success my-2 my-sm-0" >Galeria</button>
+              <button id="" type="button" class="btn btn-danger" onclick="cerrar()">Cerra sesion</button></center>
+      </div>
+
+    
+      <div  class="overlayB" id="overlayB">
+      <div class="popupB" id="popupB">
+             
+      
+            <a href="#" id="btn-cerrar-popupB" class="btn-cerrar-popupB"><i class="fas fa-times"></i></a>
+          <div class="form-inline"><center>
+            <h3>Inicia sesión</h3>
+            <div class="inp contenedor-inputs">
+              <input type="email" id="emailA1" placeholder="Coloca aqui tu email" class="form-control mr-sm-2" value="" /><br>
+              <input type="password" id="passA1" placeholder="Coloca aqui tu password" class="form-control mr-sm-2" /><br>
+              <button onclick="acceso1()" id="" class="btn btn-outline-success my-2 my-sm-0">Acceso</button>
+              </div>
+              <h3>O registrate</h3>
+            <div class="inp contenedor-inputs">
+              <input type="email" id="email1" placeholder="Coloca aqui tu email" class="form-control mr-sm-2" /><br>
+              <input type="password" id="pass1" placeholder="Coloca aqui tu password" class="form-control mr-sm-2" /><br>
+              <button onclick="enviar1()" class="btn btn-outline-success my-2 my-sm-0">Registro</button>
+            </div></center>
+            
+           
+            
+          </div>
+        </div>
       </div>
       <br>
       <section onLoad="carga()" id="userout" class="" style="display: none;">
@@ -53,40 +87,125 @@
             <img class="img" src="https://images8.alphacoders.com/540/thumb-1920-540082.jpg">
           </div>
         </div>
-         <div class="newD">
-            <div class="newE">
-              <div class="newF">
-                <h1>Contacto</h1>
+         <div class="newD"><br>
+              <div class="one" id="cuerpito">
 
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                
+                <div>
+                    <div class="carousel-inner">
+
+                        <div class="form carousel-item active">
+                           <h2>Formulario de contacto</h2>  <br>     
+                                   <input type="names" id="namesA" placeholder="Nombres Completos" class="form-control mr-sm-2" value="" /><br>
+                                    <input type="email" id="emailZ" placeholder="Correo Electronico" class="form-control mr-sm-2" value="" /><br>
+                                     <input type="" id="phone" placeholder="Telefono" class="form-control mr-sm-2" value="" /><br>
+                                      <input type="" id="inq" placeholder="Inquietud" class="form-control mr-sm-2" value="" /><br>
+                                       <input type="" id="descZ" placeholder="Descripcion de necesidad" class="form-control mr-sm-2" value="" /><br>
+                                       <button onclick="formul()" type="button" class="btn btn-outline-success my-2 my-sm-0">Enviar</button>
+
+                        </div>
+                        <div class="carousel-item">
+                          <h2>Nuestra ubicación</h2>
+                            <div onload="iniciarMap()" id="map"></div>
+                        </div>
+                        <div class="carousel-item" href="Fotos de autos.html">
+                          <div class="creditos">
+                            <h2>Creditos</h2><br>
+                            <span class="span">
+                              Este proyecto a sido creado por Steven Leaño
+                            </span><br>
+                             <article>
+                               A sido creado bajo los lenguajes de HTML, JavasCript y Css;
+                               en cuanto a la gestión de datos todo fue basado bajo una base de datos de FireBase.
+                             </article>
+                             </div>
+                    </div>
+                </div><br><br>
+                <ol class="carousel-indicators">
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span></a>
+
+                </ol>
+               
             </div>
-            <br>
-              <ul>
-                <li></li>
-              </ul>
-            <hr class="hr">
-          </div>
+
         </div>
+        </div>
+
+       </div>
        </div> 
       </section>
       <section  id="userin" class="bar" style="display: none;">
         <div class="inicio">
-        <h1 >Bienvenido Sr. usuario </h1><h1 id="emailJ"></h1>
+        <h1 class="hi" >Bienvenido Sr. usuario </h1><h1 class="hi" id="emailJ"></h1>
         </div>
         <br>
-        <hr class="hr">
         <div class="overlay" id="overlay">
           <div class="popup" id="popup">
             <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
-            <h3>Mi Galeria</h3>
-            <h4>Almacena imagenes de tus proyectos</h4>
-            <form action="">
-              <div class="contenedor-inputs">
-                <input type="text" placeholder="Nombre">
-                <input type="email" placeholder="Correo">
+            <h3>Galeria</h3>
+            <h4>Contenido de imagenes</h4>
+               <div class="containerA" id="Home">
+
+                      <div class="item">
+                    <img id="zoom_01" src="assest/img/C.jpg" alt="" class="imagen" data="./Static/Autos/Larga/imagen.jpg">
+                    <div class="card-body">
+                        <h4 class="card-title">C#</h4>
+                        </div>
+                   
+
+                </div>
+                <div class="item">
+                    <img src="assest/img/css3.jpg" alt="" class="imagen"
+                         data="./Static/Autos/Larga/rayo mcqueen.jpg">
+                    <div class="card-body">
+                        <h4 class="card-title">Css3</h4>
+                        </div>
+                    
+                </div>
+                <div class="item">
+                    <img src="assest/img/html.jpg" alt="" class="imagen" data="./Static/Autos/Larga/imagen2.jpg">
+                    <div class="card-body">
+                        <h4 class="card-title">HTML5</h4>
+                        </div>
+                    
+                </div>
+                <div class="item">
+                    <img src="assest/img/js.jpg" alt="" class="imagen" data="./Static/Autos/Larga/mach cinco.jpg">
+                    <div class="card-body">
+                        <h4 class="card-title">JavaScript</h4>
+                        </div>
+                    
+                </div>
+                 <div class="item">
+                    <img src="assest/img/mysql.jpg" alt="" class="imagen" data="./Static/Autos/Larga/mach cinco.jpg">
+                    <div class="card-body">
+                        <h4 class="card-title">MySql</h4>
+                        </div>
+                    
+                </div>
+
+                <div class="item">
+                    <img src="assest/img/php.jpg" alt="" class="imagen" data="./Static/Autos/Larga/mach cinco.jpg">
+                    <div class="card-body">
+                        <h4 class="card-title">Php</h4>
+                        </div>
+                    
+                </div>
               </div>
-              <input type="submit" class="btn-submit" value="Suscribirse">
-            </form>
           </div>
+
+
         </div>
         <div class="navbar1">
           <div class="title">
@@ -160,7 +279,7 @@
            </div>
            <div id="allC" class="allB" style="display: none;">
             <div class="cabB">
-              <span class="glyphicon glyphicon-comment"></span><h2>Crear tarea</h2>
+              <span class="glyphicon glyphicon-comment"></span><h2>Crear tarea | Actualizar Tarea</h2>
             </div>
             <div class="create">
              <input type="email" id="emailC" placeholder="Correo del encargado" class="form-control" value=""  disabled="" />
@@ -195,6 +314,7 @@
        <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
        <script src="js/app.js"></script>
        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>
 
      </body>
 

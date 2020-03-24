@@ -1,3 +1,14 @@
+function iniciarMap(){
+    var coord = {lat:4.633635 ,lng: -74.187393};
+    var map = new google.maps.Map(document.getElementById('map'),{
+      zoom: 15,
+      center: coord
+    });88
+    var marker = new google.maps.Marker({
+      position: coord,
+      map: map
+    });
+}
 var firebaseConfig = {
    apiKey: "AIzaSyABm7Ebrm1QyiR5-NXNUF6u0Yz_Ln1kvrQ",
     authDomain: "nevets-plus.firebaseapp.com",
@@ -30,14 +41,16 @@ firebase.auth().onAuthStateChanged(function (user) {
         }
         var providerData = user.providerData;
         document.getElementById("btnAcceso").style.display = "none";
+        document.getElementById("btnmenu").style.display = "none";
         document.getElementById("checkLogin").style.display = "none";
         document.getElementById("areaRegistro").style.display = "none";
         document.getElementById("areaLogin").style.display = "";
         document.getElementById("btnCerrar").style.display = "";
         document.getElementById("mi_cuenta").style.display = "";
-
+        document.getElementById("responsiveopt").style.display = "";
         document.getElementById("userout").style.display = "none";
         document.getElementById("userin").style.display = "";
+
 
          document.getElementById("emailC").value = email;
         
@@ -50,7 +63,8 @@ firebase.auth().onAuthStateChanged(function (user) {
         document.getElementById("btnAcceso").style.display = "";
         document.getElementById("checkLogin").style.display = "";
         document.getElementById("areaRegistro").style.display = "";
-
+        document.getElementById("responsiveopt").style.display = "none";
+        document.getElementById("btnmenu").style.display = "";
         document.getElementById("userout").style.display = "";
         document.getElementById("userin").style.display = "none";
 
@@ -60,6 +74,30 @@ firebase.auth().onAuthStateChanged(function (user) {
         document.getElementById("mi_cuenta").style.display = "none";
     }
 });
+
+$(document).ready(main);
+
+var contador = 1;
+
+function main(){
+    $('.menu_bar').click(function(){
+        // $('nav').toggle();
+
+        if(contador == 1){
+            $('#nav').animate({
+                left: '0'
+            });
+            contador = 0;
+        } else {
+            contador = 1;
+            $('#nav').animate({
+                left: '-100%'
+            });
+        }
+
+    });
+
+};
 
 function status(id){
     return document.getElementById(id).value;
@@ -193,7 +231,22 @@ function enviar() {
         .catch(function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
-            alert(errorMessage);
+            alert("Algo anda mal, Verifica que los datos esten correctamente ingresados o prueba tu conexion");
+        })
+        .then(function () {
+            verificar();
+        });
+}
+function enviar1() {
+    var email = document.getElementById('email1').value;
+    var pass = document.getElementById('pass1').value;
+    overlayB.classList.remove('active');
+    popupB.classList.remove('active');
+    firebase.auth().createUserWithEmailAndPassword(email, pass)
+        .catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert("Algo anda mal, Verifica que los datos esten correctamente ingresados o prueba tu conexion");
         })
         .then(function () {
             verificar();
@@ -214,9 +267,22 @@ function acceso() {
         .catch(function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
-            alert(errorMessage);
+            alert("No se pudo Iniciar sesión, Intenta de nuevo o mas tarde");
         });
 }
+function acceso1() {
+    var emailA = document.getElementById('emailA1').value;
+    var passA = document.getElementById('passA1').value;
+    overlayB.classList.remove('active');
+    popupB.classList.remove('active');
+    firebase.auth().signInWithEmailAndPassword(emailA, passA)
+    .catch(function (error) {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    alert("No se pudo Iniciar sesión, Intenta de nuevo o mas tarde");
+        });
+}
+
 function cerrar() {
     firebase.auth().signOut()
         .then(function () {
@@ -226,6 +292,7 @@ function cerrar() {
             console.log(error);
         })
 }
+
 $(document).ready(function () {
     $('#loginRestro').change(function () {
         if ($(this).is(':checked')) {
@@ -302,7 +369,7 @@ $(document).ready(function () {
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-74824848-1', 'auto');
   ga('send', 'pageview');
-
+// galeria
 var btnAbrirPopup = document.getElementById('mi_cuenta'),
     overlay = document.getElementById('overlay'),
     popup = document.getElementById('popup'),
@@ -318,3 +385,62 @@ btnCerrarPopup.addEventListener('click', function(e){
     overlay.classList.remove('active');
     popup.classList.remove('active');
 });
+var btnAbrirPopup = document.getElementById('mi_cuentaB'),
+    overlay = document.getElementById('overlay'),
+    popup = document.getElementById('popup'),
+    btnCerrarPopup = document.getElementById('btn-cerrar-popup');
+
+btnAbrirPopup.addEventListener('click', function(){
+    overlay.classList.add('active');
+    popup.classList.add('active');
+});
+
+btnCerrarPopup.addEventListener('click', function(e){
+    e.preventDefault();
+    overlay.classList.remove('active');
+    popup.classList.remove('active');
+});
+// iniciar session responsive
+var btnAbrirPopupB = document.getElementById('btnmenu'),
+    overlayB = document.getElementById('overlayB'),
+    popupB = document.getElementById('popupB'),
+    btnCerrarPopupB = document.getElementById('btn-cerrar-popupB');
+
+btnAbrirPopupB.addEventListener('click', function(){
+    overlayB.classList.add('active');
+    popupB.classList.add('active');
+});
+
+btnCerrarPopupB.addEventListener('click', function(e){
+    e.preventDefault();
+    overlayB.classList.remove('active');
+    popupB.classList.remove('active');
+});
+
+function statusA(id){
+    return document.getElementById(id).value;
+}
+function formul() {
+    var namesA  = statusA("namesA");
+    var emailZ = statusA("emailZ");
+    var phone = statusA("phone");
+    var inq = statusA("inq");
+    var descZ = statusA("descZ");
+        if (namesA.length==0 || 
+            emailZ.length==0 || 
+            phone.length==0 ||
+            inq.length==0 || 
+            descZ.length==0) {
+        alert("Algunos campos estan vacios");
+    }else{
+        var arrayDataA = array(namesA,emailZ,phone,inq,descZ);
+        var form = firebase.database().ref("formulario/"+key);
+        form.set(arrayDataA);
+        alert("Guardado correctamente");
+        vaciarcampos("namesA","");
+        vaciarcampos("emailZ","");
+        vaciarcampos("phone","");
+        vaciarcampos("inq","");
+        vaciarcampos("descZ","");
+    }   
+}
